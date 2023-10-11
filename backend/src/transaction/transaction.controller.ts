@@ -10,11 +10,11 @@ import {
 import { TransactionService } from './transaction.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
-  getSellersFromTransactions,
+  getsellersFromTransactions,
   transactionFileToTransactionsDTO,
   validateTransactions,
 } from './utils/transactionUtils';
-import { SellerService } from 'src/seller/seller.service';
+import { SellerService } from '../seller/seller.service';
 
 @Controller('transaction')
 export class TransactionController {
@@ -34,7 +34,7 @@ export class TransactionController {
       throw new BadRequestException("The file isn't valid");
     }
 
-    const sellers = getSellersFromTransactions(transactionsDTO);
+    const sellers = getsellersFromTransactions(transactionsDTO);
 
     for (const seller of sellers) {
       const sellerDB = await this.sellerService.findOne(seller.id);

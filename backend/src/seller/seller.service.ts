@@ -1,27 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
-import { SellerDTO } from './dto/seller.dto';
+import { sellerDTO } from './dto/seller.dto';
+import { SellerRepository } from './seller.repository';
 
 @Injectable()
 export class SellerService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private sellerRepository: SellerRepository) {}
 
-  async create(sellerDTO: SellerDTO) {
-    return await this.prisma.seller.create({ data: sellerDTO });
+  async create(sellerDTO: sellerDTO) {
+    return await this.sellerRepository.create(sellerDTO);
   }
 
-  async update(sellerDTO: SellerDTO) {
-    return await this.prisma.seller.update({
-      data: sellerDTO,
-      where: { id: sellerDTO.id },
-    });
+  async update(sellerDTO: sellerDTO) {
+    return await this.sellerRepository.update(sellerDTO);
   }
 
   async findAll() {
-    return await this.prisma.seller.findMany();
+    return await this.sellerRepository.findAll();
   }
 
   async findOne(id: string) {
-    return await this.prisma.seller.findUnique({ where: { id } });
+    return await this.sellerRepository.findOne(id);
   }
 }

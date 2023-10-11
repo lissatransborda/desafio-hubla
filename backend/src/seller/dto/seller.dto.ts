@@ -1,4 +1,4 @@
-export class SellerDTO {
+export class sellerDTO {
   id: string;
   balance: number;
 

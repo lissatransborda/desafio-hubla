@@ -1,6 +1,6 @@
 import { validate } from 'class-validator';
 import { TransactionDTO } from '../dto/transaction.dto';
-import { SellerDTO } from 'src/seller/dto/seller.dto';
+import { sellerDTO } from '../../seller/dto/seller.dto';
 
 export function transactionFileToTransactionsDTO(
   transactionFile: string,
@@ -42,16 +42,16 @@ export async function validateTransactions(transactions: TransactionDTO[]) {
   return transactionsErrors;
 }
 
-export function getSellersFromTransactions(
+export function getsellersFromTransactions(
   transactions: TransactionDTO[],
-): SellerDTO[] {
-  const sellers: SellerDTO[] = [];
+): sellerDTO[] {
+  const sellers: sellerDTO[] = [];
 
   transactions.forEach((transaction: TransactionDTO) => {
     const sellerIndex = sellers.findIndex((s) => s.id === transaction.sellerId);
     if (sellerIndex == -1) {
       sellers.push(
-        new SellerDTO(
+        new sellerDTO(
           transaction.sellerId,
           transaction.type == 3 ? -1 * transaction.value : transaction.value,
         ),

@@ -4,14 +4,16 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
-model Seller {
+model seller {
   id    String @id
   balance Int
   transactions Transaction[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("sellers")
 }
@@ -23,7 +25,9 @@ model Transaction {
   product String
   value Float
   sellerId String?
-  seller Seller? @relation(fields: [sellerId], references: [id])
+  seller seller? @relation(fields: [sellerId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("transactions")
 }
