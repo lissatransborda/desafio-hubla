@@ -6,6 +6,8 @@ import {
   UseInterceptors,
   BadRequestException,
   UploadedFile,
+  NotFoundException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -26,40 +28,50 @@ export class TransactionController {
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async create(@UploadedFile() file: Express.Multer.File) {
-    const transactionFile = file.buffer.toString();
+    try {
+      const transactionFile = file.buffer.toString();
 
-    const transactionsDTO = transactionFileToTransactionsDTO(transactionFile);
+      const transactionsDTO = transactionFileToTransactionsDTO(transactionFile);
 
-    if ((await validateTransactions(transactionsDTO)).length >= 1) {
-      throw new BadRequestException("The file isn't valid");
-    }
-
-    const sellers = getsellersFromTransactions(transactionsDTO);
-
-    for (const seller of sellers) {
-      const sellerDB = await this.sellerService.findOne(seller.id);
-      if (sellerDB == null) {
-        await this.sellerService.create(seller);
-      } else {
-        seller.balance += sellerDB.balance;
-        await this.sellerService.update(seller);
+      if ((await validateTransactions(transactionsDTO)).length >= 1) {
+        throw new BadRequestException("The file isn't valid");
       }
-    }
 
-    for (const transaction of transactionsDTO) {
-      await this.transactionService.create(transaction);
-    }
+      const sellers = getsellersFromTransactions(transactionsDTO);
 
-    return 'OK';
+      for (const seller of sellers) {
+        const sellerDB = await this.sellerService.findOne(seller.id);
+        if (sellerDB == null) {
+          await this.sellerService.create(seller);
+        } else {
+          seller.balance += sellerDB.balance;
+          await this.sellerService.update(seller);
+        }
+      }
+
+      for (const transaction of transactionsDTO) {
+        await this.transactionService.create(transaction);
+      }
+
+      return;
+    } catch (err) {
+      if (err instanceof TypeError) {
+        throw new BadRequestException("There isn't file");
+      }
+
+      throw new InternalServerErrorException();
+    }
   }
 
   @Get()
-  findAll() {
-    return this.transactionService.findAll();
+  async findAll() {
+    return await this.transactionService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.transactionService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const transaction = await this.transactionService.findOne(id);
+    if (!transaction) throw new NotFoundException();
+    return transaction;
   }
 }

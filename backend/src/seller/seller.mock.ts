@@ -25,8 +25,8 @@ export const mockSellerService = {
   findAll: jest.fn(() => {
     return sellersInMock;
   }),
-  findOne: jest.fn(() => {
-    return sellersInMock[0];
+  findOne: jest.fn((id) => {
+    return sellersInMock.find((s) => s.id == id);
   }),
 };
 
@@ -44,7 +44,7 @@ export const mockSellerRepository = {
   findAll: jest.fn(() => {
     return sellersInMock;
   }),
-  findOne: jest.fn(() => {
-    return sellersInMock[0];
+  findOne: jest.fn((id) => {
+    return sellersInMock.find((s) => s.id == id);
   }),
 };

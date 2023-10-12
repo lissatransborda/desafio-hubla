@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { SellerService } from './seller.service';
 
 @Controller('seller')
@@ -6,12 +6,14 @@ export class sellerController {
   constructor(private readonly sellerService: SellerService) {}
 
   @Get()
-  findAll() {
-    return this.sellerService.findAll();
+  async findAll() {
+    return await this.sellerService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.sellerService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const seller = await this.sellerService.findOne(id);
+    if (!seller) throw new NotFoundException();
+    return seller;
   }
 }

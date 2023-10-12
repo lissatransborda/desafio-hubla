@@ -29,8 +29,8 @@ export const mockTransactionService = {
   findAll: jest.fn(() => {
     return transactionsInMock;
   }),
-  findOne: jest.fn(() => {
-    return transactionsInMock[0];
+  findOne: jest.fn((id) => {
+    return transactionsInMock.find((t) => t.id == id);
   }),
 };
 
@@ -44,7 +44,7 @@ export const mockTransactionRepository = {
   findAll: jest.fn(() => {
     return transactionsInMock;
   }),
-  findOne: jest.fn(() => {
-    return transactionsInMock[0];
+  findOne: jest.fn((id) => {
+    return transactionsInMock.find((t) => t.id == id);
   }),
 };

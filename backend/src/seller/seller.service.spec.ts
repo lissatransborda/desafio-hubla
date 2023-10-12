@@ -41,6 +41,10 @@ describe('sellerService', () => {
   });
 
   it('should get one seller', async () => {
-    expect(await service.findOne(randomUUID())).toBe(sellersInMock[0]);
+    expect(await service.findOne(sellersInMock[0].id)).toBe(sellersInMock[0]);
+  });
+
+  it('should get no seller', async () => {
+    expect(await service.findOne(randomUUID())).toBe(null);
   });
 });

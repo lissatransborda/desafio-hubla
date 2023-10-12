@@ -39,6 +39,12 @@ describe('TransactionService', () => {
   });
 
   it('should get one transaction', async () => {
-    expect(await service.findOne(randomUUID())).toBe(transactionsInMock[0]);
+    expect(await service.findOne(transactionsInMock[0].id)).toBe(
+      transactionsInMock[0],
+    );
+  });
+
+  it('should get no transaction', async () => {
+    expect(await service.findOne(randomUUID())).toBe(null);
   });
 });

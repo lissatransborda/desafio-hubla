@@ -19,6 +19,6 @@ export class SellerService {
   }
 
   async findOne(id: string) {
-    return await this.sellerRepository.findOne(id);
+    return (await this.sellerRepository.findOne(id)) ?? null;
   }
 }

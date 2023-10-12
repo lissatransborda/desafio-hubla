@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionController } from './transaction.controller';
 import { TransactionService } from './transaction.service';
-import { randomUUID } from 'crypto';
 import { SellerService } from '../seller/seller.service';
 import { streamBufferToMulterFile } from '../utils/streamBufferToMulterFile';
 import { mockTransactionService, transactionsInMock } from './transaction.mock';
@@ -29,7 +28,7 @@ describe('TransactionController', () => {
       `${__dirname}/../../sales.txt`,
     );
 
-    expect(await controller.create(fileToUpload)).toBe('OK');
+    expect(await controller.create(fileToUpload)).toBeUndefined();
   });
 
   it('should get all transactions', async () => {
@@ -37,6 +36,8 @@ describe('TransactionController', () => {
   });
 
   it('should get one transaction', async () => {
-    expect(await controller.findOne(randomUUID())).toBe(transactionsInMock[0]);
+    expect(await controller.findOne(transactionsInMock[0].id)).toBe(
+      transactionsInMock[0],
+    );
   });
 });

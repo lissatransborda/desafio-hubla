@@ -15,6 +15,6 @@ export class TransactionService {
   }
 
   async findOne(id: string) {
-    return await this.transactionRepository.findOne(id);
+    return (await this.transactionRepository.findOne(id)) ?? null;
   }
 }

@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { sellerController } from './seller.controller';
 import { SellerService } from './seller.service';
 import { mockSellerService, sellersInMock } from './seller.mock';
-import { randomUUID } from 'crypto';
 
 describe('sellerController', () => {
   let controller: sellerController;
@@ -24,6 +23,8 @@ describe('sellerController', () => {
   });
 
   it('should get one seller', async () => {
-    expect(await controller.findOne(randomUUID())).toBe(sellersInMock[0]);
+    expect(await controller.findOne(sellersInMock[0].id)).toBe(
+      sellersInMock[0],
+    );
   });
 });
