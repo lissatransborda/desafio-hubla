@@ -1,0 +1,11 @@
+.transactionsHeader {
+  width: 90%;
+}
+
+.importTransactionsButton {
+  background-color: #d7ff60;
+  padding: 0.5em;
+  font-size: 1.6ch;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: white) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+.sellerId {
+  color: #3b4d00;
+}
+
+.pageControls {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.pageControl {
+  background-color: #d7ff60;
+  padding: 0.4em;
+}
+
+.pageControl:disabled,
+.pageControl[disabled] {
+  opacity: 0.5;
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 10px;
+  background-color: #fdfdfd;
+  width: 90%;
+}
+
+th,
+td {
+  border: 1px solid rgb(187, 187, 187);
+  padding: 0.3em;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
