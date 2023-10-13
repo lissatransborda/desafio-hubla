@@ -6,6 +6,7 @@ import {
   transactionsInMock,
 } from './transaction.mock';
 import { randomUUID } from 'crypto';
+import { sellersInMock } from '../seller/seller.mock';
 
 describe('TransactionService', () => {
   let service: TransactionService;
@@ -35,7 +36,17 @@ describe('TransactionService', () => {
   });
 
   it('should get all transactions', async () => {
-    expect(await service.findAll()).toBe(transactionsInMock);
+    expect(await service.findAll()).toStrictEqual(transactionsInMock);
+  });
+
+  it('should get all transactions by seller', async () => {
+    expect(await service.findAll(sellersInMock[0].id)).toStrictEqual(
+      transactionsInMock,
+    );
+  });
+
+  it('should get no transactions by seller', async () => {
+    expect(await service.findAll('NOSOLLER')).toStrictEqual([]);
   });
 
   it('should get one transaction', async () => {

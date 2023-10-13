@@ -1,11 +1,11 @@
 export const sellersInMock = [
   {
-    id: 'SELLER 1',
+    id: 'SELLER',
     balance: 0,
     transactions: [],
   },
   {
-    id: 'SELLER 2',
+    id: 'ANOTHER SELLER',
     balance: 0,
     transactions: [],
   },

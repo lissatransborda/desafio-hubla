@@ -49,6 +49,30 @@ describe('TransactionController (e2e)', () => {
       });
   });
 
+  it('/transaction?seller=SELLER (GET) --> 200 OK', () => {
+    return request(app.getHttpServer())
+      .get('/transaction?seller=SELLER')
+      .expect(200)
+      .then((response) => {
+        expect(response.body).toEqual(transactionsInMock);
+      });
+  });
+
+  it('/transaction?seller=NOSELLER (GET) --> 404', () => {
+    return request(app.getHttpServer())
+      .get('/transaction?seller=NOSELLER')
+      .expect(200)
+      .then((response) => {
+        expect(response.body).toEqual([]);
+      });
+  });
+
+  it('/transaction (GET) --> 400', () => {
+    return request(app.getHttpServer())
+      .get(`/transaction/${randomUUID()}`)
+      .expect(404);
+  });
+
   it('/transaction/:id (GET) --> 200 OK', () => {
     return request(app.getHttpServer())
       .get(`/transaction/${transactionsInMock[0].id}`)

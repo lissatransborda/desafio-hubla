@@ -14,8 +14,8 @@ export class SellerService {
     return await this.sellerRepository.update(sellerDTO);
   }
 
-  async findAll() {
-    return await this.sellerRepository.findAll();
+  async findAll(page: number = 1, perPage: number = 10) {
+    return await this.sellerRepository.findAll(page, perPage);
   }
 
   async findOne(id: string) {

@@ -10,8 +10,19 @@ export class TransactionService {
     return await this.transactionRepository.create(transactionDTO);
   }
 
-  async findAll() {
-    return await this.transactionRepository.findAll();
+  async findAll(
+    sellerId: string = null,
+    page: number = 1,
+    perPage: number = 10,
+  ) {
+    if (sellerId) {
+      return await this.transactionRepository.findAllBySellerId(
+        sellerId,
+        page,
+        perPage,
+      );
+    }
+    return await this.transactionRepository.findAll(page, perPage);
   }
 
   async findOne(id: string) {

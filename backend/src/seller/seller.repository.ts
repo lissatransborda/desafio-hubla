@@ -17,16 +17,19 @@ export class SellerRepository {
     });
   }
 
-  async findAll() {
+  async findAll(page: number, perPage: number) {
     return await this.prisma.seller.findMany({
-      include: { transactions: true },
+      skip: page > 0 ? perPage * (page - 1) : 0,
+      take: perPage,
+      include: {
+        transactions: true,
+      },
     });
   }
 
   async findOne(id: string) {
     return await this.prisma.seller.findUnique({
       where: { id },
-      include: { transactions: true },
     });
   }
 }

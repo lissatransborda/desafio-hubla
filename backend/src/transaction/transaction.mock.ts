@@ -26,9 +26,13 @@ export const mockTransactionService = {
       ...dto,
     };
   }),
-  findAll: jest.fn(() => {
+  findAll: jest.fn((sellerId = null) => {
+    if (sellerId) {
+      return transactionsInMock.filter((t) => t.sellerId == sellerId);
+    }
     return transactionsInMock;
   }),
+
   findOne: jest.fn((id) => {
     return transactionsInMock.find((t) => t.id == id);
   }),
@@ -44,6 +48,11 @@ export const mockTransactionRepository = {
   findAll: jest.fn(() => {
     return transactionsInMock;
   }),
+
+  findAllBySellerId: jest.fn((sellerId) => {
+    return transactionsInMock.filter((t) => t.sellerId == sellerId);
+  }),
+
   findOne: jest.fn((id) => {
     return transactionsInMock.find((t) => t.id == id);
   }),

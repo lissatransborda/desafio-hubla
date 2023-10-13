@@ -17,8 +17,21 @@ export class TransactionRepository {
     });
   }
 
-  async findAll() {
-    return await this.prisma.transaction.findMany();
+  async findAll(page: number, perPage: number) {
+    return await this.prisma.transaction.findMany({
+      skip: page > 0 ? perPage * (page - 1) : 0,
+      take: perPage,
+    });
+  }
+
+  async findAllBySellerId(sellerId: string, page: number, perPage: number) {
+    return await this.prisma.transaction.findMany({
+      skip: page > 0 ? perPage * (page - 1) : 0,
+      take: perPage,
+      where: {
+        sellerId,
+      },
+    });
   }
 
   async findOne(id: string) {

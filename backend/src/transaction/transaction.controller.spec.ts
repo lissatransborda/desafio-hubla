@@ -4,7 +4,7 @@ import { TransactionService } from './transaction.service';
 import { SellerService } from '../seller/seller.service';
 import { streamBufferToMulterFile } from '../utils/streamBufferToMulterFile';
 import { mockTransactionService, transactionsInMock } from './transaction.mock';
-import { mockSellerService } from '../seller/seller.mock';
+import { mockSellerService, sellersInMock } from '../seller/seller.mock';
 
 describe('TransactionController', () => {
   let controller: TransactionController;
@@ -33,6 +33,12 @@ describe('TransactionController', () => {
 
   it('should get all transactions', async () => {
     expect(await controller.findAll()).toBe(transactionsInMock);
+  });
+
+  it('should get all transactions by sellerId', async () => {
+    expect(await controller.findAll(sellersInMock[0].id)).toStrictEqual(
+      transactionsInMock,
+    );
   });
 
   it('should get one transaction', async () => {

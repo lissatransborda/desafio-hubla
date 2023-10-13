@@ -165,6 +165,12 @@ Retrieves all transactions
 ]
 ```
 
+This route also accepts the query params:
+
+- `sellerId` - Filter transactions by sellerId
+- `perPage` - number of transactions by page
+- `page` - page number
+
 ### GET /transaction/:id
 
 Retrieves one transaction by ID
@@ -245,6 +251,11 @@ Retrieves all sellers
 ]
 ```
 
+This route also accepts the query params:
+
+- `perPage` - number of transactions by page
+- `page` - page number
+
 ### GET /seller/:id
 
 Retrieves one seller by ID
@@ -257,18 +268,6 @@ Retrieves one seller by ID
     "balance": 12.75,
     "created_at": "2023-10-11T21:13:55.323Z",
     "updated_at": "2023-10-11T23:13:53.259Z",
-    "transactions": [
-      {
-        "id": "9bf71936-2fe7-4fff-b935-b4202faa0733",
-        "type": 1,
-        "date": "2022-01-15T22:20:30.000Z",
-        "product": "CURSO DE BEM-ESTAR",
-        "value": 12.75,
-        "sellerId": "JOSE CARLOS",
-        "created_at": "2023-10-11T21:13:55.403Z",
-        "updated_at": "2023-10-11T21:13:55.403Z"
-      }
-    ]
   },
 ```
 
