@@ -60,7 +60,7 @@ describe('TransactionController (e2e)', () => {
 
   it('/transaction?seller=NOSELLER (GET) --> 404', () => {
     return request(app.getHttpServer())
-      .get('/transaction?seller=NOSELLER')
+      .get('/transaction?sellerId=NOSELLER')
       .expect(200)
       .then((response) => {
         expect(response.body).toEqual([]);
