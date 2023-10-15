@@ -39,7 +39,7 @@ docker build --tag frontend-challange-hubla .
 And run with the backend database URL.
 
 ```
-docker run -i -p 5000:5000 --env BACKEND_URL="[URL]" backend-challange-hubla
+docker run -i -p 5000:5000 --env BACKEND_URL="[URL]" frontend-challange-hubla
 ```
 
 ### NPM
