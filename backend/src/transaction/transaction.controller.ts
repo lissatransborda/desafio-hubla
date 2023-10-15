@@ -67,19 +67,15 @@ export class TransactionController {
     @Query('page') page: number = 1,
     @Query('perPage') perPage: number = 10,
   ) {
-    const transactions = await this.transactionService.findAll(
+    return await this.transactionService.findAll(
       sellerId,
       Number(page),
       Number(perPage),
     );
-    if (!transactions) throw new NotFoundException();
-    return transactions;
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    const transaction = await this.transactionService.findOne(id);
-    if (!transaction) throw new NotFoundException();
-    return transaction;
+    return await this.transactionService.findOne(id);
   }
 }

@@ -6,8 +6,8 @@ Backend responsibilities in this project are:
 
 - Communication with the database, ensuring the stability of the single source of truth
 - File upload
-- Record of transactions and creators/affiliates
-- Send transaction and creator/affiliate list (with balance)
+- Record of transactions and producers/affiliates
+- Send transaction and producer/affiliate list (with balance)
 
 ## Technologies
 
@@ -37,7 +37,7 @@ docker build --tag backend-challange-hubla .
 And run with a PostgreSQL database URL.
 
 ```
-docker run -i -p 3000:3000 --env DATABASE_URL="[URL]" backend-challange-hubla
+docker run -i -p 8000:8000 --env DATABASE_URL="[URL]" backend-challange-hubla
 ```
 
 ### NPM
@@ -82,17 +82,17 @@ npm run test:e2e
 
 ### Seller
 
-Seller represents a seller, which can be a creator or affiliate. The purpose of this entity is to keep a record of each seller's transactions, and calculate their current balance.
+Seller represents a seller, which can be a producer or affiliate. The purpose of this entity is to keep a record of each seller's transactions, and calculate their current balance.
 
 #### Properties
 
 - `id` - The unique identifier of each seller. According to the information given in `sales.txt`, it is the name.
 - `balance` - Current balance of the seller. This data is updated with each transaction involving the seller.
-- `transactions` - A list representing the list of transactions involving the seller. This list is updated with each insertion of transactions involving this seller.
+- `transactions` - A list representing the list of transactions involving the seller.
 
 ### Transaction
 
-Transaction represents a creator/affiliate's transaction. This entity depends directly on the existence of the seller involving the transaction. All data is taken from the file `sales.txt`.
+Transaction represents a producer/affiliate's transaction. This entity depends directly on the existence of the seller involving the transaction. All data is taken from the file `sales.txt`.
 
 ### Properties
 
@@ -101,7 +101,7 @@ Transaction represents a creator/affiliate's transaction. This entity depends di
 - `date` - Transaction date
 - `product` - Name of the product involving the transaction.
 - `value` - Financial cost of the product.
-- `sellerId` - ID of the product seller, which may be the creator/affiliate.
+- `sellerId` - ID of the product seller, which may be the producer/affiliate.
 
 ## Routes
 
