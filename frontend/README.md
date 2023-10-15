@@ -16,6 +16,10 @@ Frontend responsibilities in this project are:
 - Typescript ^5
 - Tailwind ^3
 
+## Environment Variables
+
+- `NEXT_PUBLIC_BACKEND_URL` - Backend URL, like `http://localhost:8000`
+
 ## Setup
 
 ### Docker
