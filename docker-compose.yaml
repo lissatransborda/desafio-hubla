@@ -1,0 +1,47 @@
+services:
+  db:
+    image: 'postgres'
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hubla
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+
+  migrate:
+    build: 
+      context: backend
+    command: npm run prisma:migrate:deploy
+    depends_on:
+      - "db"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/hubla
+      CORS_ORIGIN: frontend:5000
+
+  backend:
+    build: 
+      context: backend
+    ports:
+      - 8000:8000
+    depends_on:
+      - "db"
+      - "migrate"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/hubla
+      CORS_ORIGIN: http://localhost:5000
+
+  frontend:
+    build:
+      context: frontend
+    ports:
+      - 5000:5000
+    depends_on:
+      - "backend"
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: backend:8000
+
+volumes:
+  postgres-data:
