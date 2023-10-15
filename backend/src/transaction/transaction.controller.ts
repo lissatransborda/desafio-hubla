@@ -76,6 +76,8 @@ export class TransactionController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.transactionService.findOne(id);
+    const transaction = await this.transactionService.findOne(id);
+    if (!transaction) throw new NotFoundException();
+    return transaction;
   }
 }
