@@ -17,13 +17,12 @@ Backend responsibilities in this project are:
 - Jest ^29.5.0
 
 
+The project is architected in a "Controller Service Repository" model, separating responsibilities following SOLID principles.
+
 ## Environment Variables
 
 - `DATABASE_URL` - PostgreSQL database URL, like `postgresql://postgres:1234@localhost:5432`
 - `CORS_ORIGIN` - Frontend URL, like: `http://localhost:5000`
-
-
-The project is architected in a "Controller Service Repository" model, separating responsibilities following SOLID principles.
 
 ## Setup
 
