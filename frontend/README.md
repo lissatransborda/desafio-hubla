@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend of the challenge
 
-## Getting Started
+## Responsabilities
 
-First, run the development server:
+Frontend responsibilities in this project are:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Comunication with backend, returning transactions and sellers data, and uploading the sales file
+- Provide a simple UI to the final user
+- facilitate the access to the data
+
+## Technologies
+
+- NextJS 13.5.4
+- React ^18
+- Cypress "^13.3.1
+- Typescript ^5
+- Tailwind ^3
+
+## Setup
+
+### Docker
+
+First, build the project preferably with [Docker BuildX](https://docs.docker.com/engine/reference/commandline/buildx/).
+
+```
+docker buildx build --tag frontend-challange-hubla .
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If you can't use Docker BuildX, use the traditional build command.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+docker build --tag frontend-challange-hubla .
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+And run with the backend database URL.
 
-## Learn More
+```
+docker run -i -p 5000:5000 --env BACKEND_URL="[URL]" backend-challange-hubla
+```
 
-To learn more about Next.js, take a look at the following resources:
+### NPM
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You can also start with NPM:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> Default
 
-## Deploy on Vercel
+```
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm run dev
+```
+
+Development mode will only enable hot reload.
+
+## Testing
+
+> Unit tests
+
+```
+npx cypress run
+```
+
+> E2E Tests (and unit tests)
+
+```
+npm run cypress open
+```
+
+## Entities
+
+### Seller
+
+Seller represents a seller, which can be a producer or affiliate. The purpose of this entity is to keep a record of each seller's transactions, and calculate their current balance.
+
+#### Properties
+
+- `id` - The unique identifier of each seller. According to the information given in `sales.txt`, it is the name.
+- `balance` - Current balance of the seller. This data is updated with each transaction involving the seller.
+- `transactions` - A list representing the list of transactions involving the seller.
+
+### Transaction
+
+Transaction represents a producer/affiliate's transaction. This entity depends directly on the existence of the seller involving the transaction. All data is taken from the file `sales.txt`.
+
+### Properties
+
+- `id` – The unique identifier of each transaction. It's a random ID in uuid4.
+- `type` - Transaction type, ranging from 1 to 4.
+- `date` - Transaction date
+- `product` - Name of the product involving the transaction.
+- `value` - Financial cost of the product.
+- `sellerId` - ID of the product seller, which may be the producer/affiliate.
+
+## Pages
+
+### /
+
+- Show transactions list
+- Import sales file
+
+![/ page](./assets/screenshot01.png)
+
+### /seller
+
+- Show seller list with transactions counter
+
+![/ seller](./assets/screenshot02.png)
+
+### /seller/:id
+
+- Show transactions list of a seller
+- Show total balance of a seller
+
+![/ seller/:id](./assets/screenshot03.png)

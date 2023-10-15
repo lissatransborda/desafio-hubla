@@ -9,7 +9,7 @@ export default defineConfig({
   },
 
   e2e: {
-    baseUrl: "http://localhost:3001",
+    baseUrl: "http://localhost:5000",
     retries: {
       runMode: 3,
     },

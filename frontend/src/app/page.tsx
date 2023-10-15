@@ -24,6 +24,7 @@ export default function Home() {
     formData.append("file", event.target.files[0]);
 
     const response = await postTransactionFile(formData);
+    mutate()
 
     alertFileResponse(response);
   };
