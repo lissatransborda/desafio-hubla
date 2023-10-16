@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { getHumanType } from "../../src/utils/transaction/getHumanType";
+import { getHumanRedableType } from "../../src/utils/transaction/getHumanRedableType";
 import { transactions } from "../../src/test/mocks/transactions.mock";
 import { sellers } from "../../src/test/mocks/sellers.mock";
 
@@ -17,7 +17,7 @@ describe("PageHome", () => {
   it("should have the correct dataset", () => {
     cy.get(".transactionType")
       .first()
-      .should("have.text", getHumanType(transactions[0].type));
+      .should("have.text", getHumanRedableType(transactions[0].type));
     cy.get(".transactionType")
       .first()
       .should(

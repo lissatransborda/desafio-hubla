@@ -2,7 +2,6 @@ import { Seller } from "@/models/seller";
 import "./styles.css";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
-import { Transaction } from "@/models/transaction";
 import { KeyedMutator } from "swr";
 
 interface sellerTableProps {
@@ -15,11 +14,11 @@ interface sellerTableProps {
 export default function SellerTable(props: sellerTableProps) {
   if (!props.data) return "Loading sellers";
 
-  const canPreviousPage = props.page && props.page >= 2;
+  const hasPreviousPage = props.page && props.page >= 2;
   const canNextPage = props.data?.length != 0 && props.data?.length == 10;
 
   const previousPage = () => {
-    if (canPreviousPage && props.page && props.setPage && props.mutate) {
+    if (hasPreviousPage && props.page && props.setPage && props.mutate) {
       props.setPage(props.page - 1);
       props.mutate();
     }
@@ -35,22 +34,22 @@ export default function SellerTable(props: sellerTableProps) {
   return (
     <div className="sellers mt-2">
       {props.page && props.setPage && props.mutate && (
-        <div className="pageControls">
+        <nav className="pageControls">
           <button
             className="pageControl"
             onClick={previousPage}
-            {...(!canPreviousPage && { disabled: true })}
+            disabled={!hasPreviousPage}
           >
             Previous page
           </button>
           <button
             className="pageControl"
             onClick={nextPage}
-            {...(!canNextPage && { disabled: true })}
+            disabled={!canNextPage}
           >
             Next page
           </button>
-        </div>
+        </nav>
       )}
 
       {props.data.length != 0 ? (

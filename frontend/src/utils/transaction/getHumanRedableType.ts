@@ -1,4 +1,4 @@
-export function getHumanType(type: number) {
+export function getHumanRedableType(type: number) {
   switch (type) {
     case 1:
       return "Producer sale";
