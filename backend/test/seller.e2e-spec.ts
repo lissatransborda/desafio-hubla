@@ -3,7 +3,10 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { sellerModule } from '../src/seller/seller.module';
 import { SellerRepository } from '../src/seller/seller.repository';
-import { mockSellerRepository, sellersInMock } from '../src/seller/__mocks__/seller';
+import {
+  mockSellerRepository,
+  sellersInMock,
+} from '../src/seller/__mocks__/seller';
 import { randomUUID } from 'crypto';
 
 describe('sellerController (e2e)', () => {
