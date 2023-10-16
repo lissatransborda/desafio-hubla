@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TransactionTable from "./index";
-import { getHumanType } from "@/utils/transaction/getHumanType";
 import { transactions } from "../../../test/mocks/transactions.mock";
+import { getHumanRedableType } from "@/utils/transaction/getHumanRedableType";
 
 describe("<TransactionTable />", () => {
   it("should have the correct number of rows and columns", () => {
@@ -15,7 +15,7 @@ describe("<TransactionTable />", () => {
 
     cy.get(".transactionType")
       .first()
-      .should("have.text", getHumanType(transactions[0].type));
+      .should("have.text", getHumanRedableType(transactions[0].type));
 
     cy.get(".transactionType")
       .first()

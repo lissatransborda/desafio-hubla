@@ -2,7 +2,7 @@ import React from "react";
 import SellerByIdPage from "./page";
 import { transactions } from "@/test/mocks/transactions.mock";
 import { sellers } from "@/test/mocks/sellers.mock";
-import { getHumanType } from "@/utils/transaction/getHumanType";
+import { getHumanRedableType } from "@/utils/transaction/getHumanRedableType";
 
 describe("<SellerByIdPage />", () => {
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe("<SellerByIdPage />", () => {
   it("should have the correct dataset", () => {
     cy.get(".transactionType")
       .first()
-      .should("have.text", getHumanType(transactions[0].type));
+      .should("have.text", getHumanRedableType(transactions[0].type));
     cy.get(".transactionType")
       .first()
       .should(
