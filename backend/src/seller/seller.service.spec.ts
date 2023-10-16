@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SellerService } from './seller.service';
 import { SellerRepository } from './seller.repository';
-import { mockSellerRepository, sellersInMock } from './seller.mock';
+import { mockSellerRepository, sellersInMock } from './__mocks__/seller';
 import { randomUUID } from 'crypto';
 
 describe('sellerService', () => {

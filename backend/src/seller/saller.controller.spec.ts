@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { sellerController } from './seller.controller';
 import { SellerService } from './seller.service';
-import { mockSellerService, sellersInMock } from './seller.mock';
+import { mockSellerService, sellersInMock } from './__mocks__/seller';
 
 describe('sellerController', () => {
   let controller: sellerController;

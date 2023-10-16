@@ -3,8 +3,8 @@ import { TransactionController } from './transaction.controller';
 import { TransactionService } from './transaction.service';
 import { SellerService } from '../seller/seller.service';
 import { streamBufferToMulterFile } from '../utils/streamBufferToMulterFile';
-import { mockTransactionService, transactionsInMock } from './transaction.mock';
-import { mockSellerService, sellersInMock } from '../seller/seller.mock';
+import { mockTransactionService, transactionsInMock } from './__mocks__/transaction';
+import { mockSellerService, sellersInMock } from '../seller/__mocks__/seller';
 
 describe('TransactionController', () => {
   let controller: TransactionController;

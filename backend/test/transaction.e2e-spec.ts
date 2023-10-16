@@ -6,9 +6,9 @@ import { TransactionRepository } from '../src/transaction/transaction.repository
 import {
   mockTransactionRepository,
   transactionsInMock,
-} from '../src/transaction/transaction.mock';
+} from '../src/transaction/__mocks__/transaction';
 import { SellerRepository } from '../src/seller/seller.repository';
-import { mockSellerRepository } from '../src/seller/seller.mock';
+import { mockSellerRepository } from '../src/seller/__mocks__/seller';
 import { randomUUID } from 'crypto';
 
 describe('TransactionController (e2e)', () => {

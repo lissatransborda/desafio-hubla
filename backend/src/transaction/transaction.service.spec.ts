@@ -4,9 +4,9 @@ import { TransactionRepository } from './transaction.repository';
 import {
   mockTransactionRepository,
   transactionsInMock,
-} from './transaction.mock';
+} from './__mocks__/transaction';
 import { randomUUID } from 'crypto';
-import { sellersInMock } from '../seller/seller.mock';
+import { sellersInMock } from '../seller/__mocks__/seller';
 
 describe('TransactionService', () => {
   let service: TransactionService;
