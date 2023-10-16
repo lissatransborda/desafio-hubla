@@ -41,7 +41,7 @@ Frontend responsibilities in this project are:
 - Typescript
 - Tailwind ^3
 
-## Running
+## How to run
 
 ### Docker Compose
 
@@ -53,4 +53,4 @@ docker-compose build && docker-compose up
 
 ### NPM
 
-See [backend](./backend/) and [frontend](./frontend/) directories.
+See more in [backend](./backend/) and [frontend](./frontend/) directories.
